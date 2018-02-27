@@ -1,0 +1,21 @@
+#include<iostream>
+#include<string>
+#include<cmath>
+#include<algorithm>
+#include<iomanip>
+using namespace std;
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
+int main()
+{fast();
+int n,y,tp=0;
+cin>>n>>y;
+for(int i=1;i<=n;i++)
+	if (y%i==0&&y/i<=n)
+		tp++;
+cout<<tp;
+}
