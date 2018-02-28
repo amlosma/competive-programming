@@ -1,0 +1,101 @@
+/*
+لا تقهر عبدا حتى لا يؤذيك دعاءه
+*/
+#include<bits/stdc++.h>
+#include <stdlib.h>
+#include<stdio.h>
+#include<assert.h>
+using namespace std;
+#define PI 3.14159265359
+#define OO 1e9
+#define S second
+#define F first
+#define MP                  make_pair
+int dx[] = { 0, 0, -1, 1, 1, 1, -1, -1 };
+int dy[] = { -1, 1, 0, 0, 1, -1, 1, -1 };
+#define sz(v) ( (int) (v.size()) )
+#define all(v) v.begin(),v.end()
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
+ll gcd(ll a, ll b) { return !b ? a : gcd(b, a % b); }
+ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
+int n, m, c = 0;
+int cnt;
+bool valid(int i, int j)
+{
+	return i >= 0 && i < n&&j >= 0 && j<m;
+}
+int fix(int y) {
+	if (y < 0) return m - 1;
+	if (y >= m) return 0;
+	return y;
+}
+/*void itfunction_to_Calc_diver_from_1to_1000000()
+{
+long long div[1000001];
+for (long long i = 1; i <= 1000000; i++)
+{
+for (int j = i; j <= 1000000; j += i)
+div[j
+}
+}*/
+int sumDigit(long long  x)
+{
+	int c = 0;
+	while (x)
+	{
+		c += x % 10;
+		x /= 10;
+	}
+	return c;
+}
+long long prod(long long  n)
+{
+	while (n >= 10)
+	{
+		long long  tp = 1;
+		while (n)
+		{
+			int y = n % 10;
+			if (y)
+				tp *= y;
+			n /= 10;
+		}
+		n = tp;
+	}
+	return n;
+}
+char str[1000000];
+int main(){
+	string s;
+	while (gets(str) !=NULL)
+	{
+		string s = str;
+		if (s == "DONE")break;
+		string m="";
+		for (int i = 0; i < (int)s.size(); i++)
+		{
+			s[i] = tolower(s[i]);
+			if (s[i] >= 'a'&&s[i] <= 'z')
+			{
+				s[i] = tolower(s[i]);
+				m += s[i];
+			}
+		}
+		string w = m;
+		reverse(all(m));
+		if (m != w)
+			printf("Uh oh..\n");
+		else
+			printf("You won't be eaten!\n");
+
+	}
+}
