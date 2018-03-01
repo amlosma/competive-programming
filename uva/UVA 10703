@@ -1,0 +1,104 @@
+/*
+لا تقهر عبدا حتى لا يؤذيك دعاءه
+*/
+#define _CRT_SECURE_NO_WARNINGS
+#include<bits/stdc++.h>
+#include <stdlib.h>
+#include<stdio.h>
+#include<assert.h>
+using namespace std;
+#define PI 3.14159265359
+#define OO 1e9
+#define S second
+#define F first
+#define MP                  make_pair
+int dx[] = { 0, 0, -1, 1, 1, 1, -1, -1 };
+int dy[] = { -1, 1, 0, 0, 1, -1, 1, -1 };
+#define sz(v) ( (int) (v.size()) )
+#define all(v) v.begin(),v.end()
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
+ll gcd(ll a, ll b) { return !b ? a : gcd(b, a % b); }
+ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
+int n, m, c = 0;
+int cnt;
+bool valid(int i, int j)
+{
+	return i >= 0 && i < n&&j >= 0 && j<m;
+}
+int fix(int y) {
+	if (y < 0) return m - 1;
+	if (y >= m) return 0;
+	return y;
+}
+/*void itfunction_to_Calc_diver_from_1to_1000000()
+{
+long long div[1000001];
+for (long long i = 1; i <= 1000000; i++)
+{
+for (int j = i; j <= 1000000; j += i)
+div[j
+}
+}*/
+int sumDigit(long long  x)
+{
+	int c = 0;
+	while (x)
+	{
+		c += x % 10;
+		x /= 10;
+	}
+	return c;
+}
+long long prod(long long  n)
+{
+	while (n >= 10)
+	{
+		long long  tp = 1;
+		while (n)
+		{
+			int y = n % 10;
+			if (y)
+				tp *= y;
+			n /= 10;
+		}
+		n = tp;
+	}
+	return n;
+}
+
+int main(){
+	int w, h, n, x, x2, y, y2;
+
+	while (scanf("%d %d %d", &w, &h, &n) == 3 && w){
+		int arr[600][600];
+		memset(arr, 0, sizeof(arr));
+
+		for (int k = 1; k <= n; k++){
+			scanf("%d %d %d %d", &x, &y, &x2, &y2);
+			for (int i = min(x, x2); i <= max(x, x2); i++)
+			for (int j = min(y, y2); j <= max(y, y2); j++)
+				arr[i][j] = 1;
+		}
+
+	  int	sum = 0;
+		for (int i = 1; i <= w; i++)
+		for (int j = 1; j <= h; j++)
+		if (!arr[i][j])
+			sum += 1;
+
+		if (sum == 0)printf("There is no empty spots.\n");
+		else if (sum == 1)printf("There is one empty spot.\n");
+		else printf("There are %d empty spots.\n", sum);
+	}
+	return 0;
+}
+	
