@@ -1,0 +1,61 @@
+/*
+لا تقهر عبدا حتى لا يؤذيك دعاءه
+*/
+#define _CRT_SECURE_NO_WARNINGS
+#include<bits/stdc++.h>
+#include <stdlib.h>
+#include<stdio.h>
+#include<assert.h>
+using namespace std;
+#define PI 3.14159265359
+#define OO 1e9
+#define S second
+#define F first
+#define MP                  make_pair
+int dx[] = { 0, 0, -1, 1, 1, 1, -1, -1 };
+int dy[] = { -1, 1, 0, 0, 1, -1, 1, -1 };
+#define sz(v) ( (int) (v.size()) )
+#define all(v) v.begin(),v.end()
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
+int pr(int n)
+{
+	int p = 1;
+	while (n--)p *= 2;
+	return p;
+}
+int main(){
+	
+	int n, arr[20000], sum[20000];
+	while (scanf("%d", &n) == 1) {
+		for (int i = 0; i < pr(n); i++)
+			scanf("%d", &arr[i]);
+		for (int i = 0; i < pr(n); i++)
+		{
+			sum[i] = 0;
+			for (int j = 1; j < pr(n); j*=2)
+			{
+				sum[i] += arr[i ^ j];
+			}
+		}int tp = 0;
+		for (int i = 0; i < pr(n); i++)
+		{
+			for (int j = 1; j < pr(n); j*=2)
+			{
+				if ((sum[i] + sum[i ^ j])>tp)
+					tp = (sum[i] + sum[i ^j]);
+			}
+		}
+		printf("%d\n",tp);
+	}
+	return 0;
+}
+	
