@@ -1,0 +1,75 @@
+/*
+لا تقهر عبدا حتى لا يؤذيك دعاءه
+*/
+#define _CRT_SECURE_NO_WARNINGS
+#include<bits/stdc++.h>
+#include <stdlib.h>
+#include<stdio.h>
+#include<assert.h>
+using namespace std;
+#define PI 3.14159265359
+#define OO 1e9
+#define S second
+#define F first
+#define MP                  make_pair
+int dx[] = { 0, 0, -1, 1, 1, 1, -1, -1 };
+int dy[] = { -1, 1, 0, 0, 1, -1, 1, -1 };
+#define sz(v) ( (int) (v.size()) )
+#define all(v) v.begin(),v.end()
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
+int main(){
+	int n;
+	vector<int>arr(10001);
+	while (cin >> n&&n){
+		while (1){
+			{
+				if (cin >> arr[0] && arr[0] == 0)
+				{
+					puts(""); break;
+				}
+				else
+				{
+					int c = 0;
+					stack<int>sk;;
+					for (int i = 1; i < n; i++)
+						cin >> arr[i];
+					for (int i = 1; i <= n; i++)
+					{
+						if (i == arr[c])
+						{
+							c++;
+							while (!sk.empty())
+							{
+								if (sk.top() == arr[c])
+								{
+									sk.pop(); c++;
+								}
+								else break;
+							}
+						}
+						else
+						sk.push(i);
+					}
+					if ((int)sk.size() == 0)
+						puts("Yes");
+					else
+					{
+						puts("No");
+						while ((int)sk.size() > 0){ sk.pop(); }
+					}
+				}
+			}
+		}
+	}
+	return 0;
+}
+	
