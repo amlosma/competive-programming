@@ -1,0 +1,46 @@
+#include<iostream>
+#include<cmath>
+#include<sstream>
+#include<algorithm>
+#include<iomanip>
+#include<fstream> 
+#include<set>
+#include<map>
+#include <string>
+#include<vector>
+#include <bitset>
+using namespace std;
+
+/*int Arwa(long long x)
+{
+  for(long long i=2 ; i*i<=x;i++)
+  {  if(x%i==0)return 0;}
+  return 1;
+}*/
+void fara7a()
+{
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+}
+//int arr[100000];
+using namespace std;
+int main()
+{
+	
+	string s;
+	set<char>st;
+	cin>>s;
+	for(int i=0 ; i<(int)s.size();i++)
+	{
+	   st.insert(s[i]) ;            
+	                
+	                
+	}
+	int z= int (st.size());
+	if (z%2==0)
+	 cout<<"CHAT WITH HER!";
+   else
+	   cout<<"IGNORE HIM!";
+	
+}
