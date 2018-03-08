@@ -1,0 +1,64 @@
+/*
+لا تقهر عبدا حتى لا يؤذيك دعاءه
+*/
+#define _CRT_SECURE_NO_WARNINGS
+#include<bits/stdc++.h>
+#include <stdlib.h>
+#include<stdio.h>
+#include<assert.h>
+using namespace std;
+#define PI 3.14159265359
+#define OO 1e9
+#define S second
+#define F first
+#define MP                  make_pair
+int dx[] = { 0, 0, -1, 1, 1, 1, -1, -1 };
+int dy[] = { -1, 1, 0, 0, 1, -1, 1, -1 };
+#define sz(v) ( (int) (v.size()) )
+#define all(v) v.begin(),v.end()
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
+ll gcd(ll a, ll b) { return !b ? a : gcd(b, a % b); }
+ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
+int n, m, c = 0;
+int cnt;
+bool valid(int i, int j)
+{
+	return i >= 0 && i < n&&j >= 0 && j<m;
+}
+int fix(int y) {
+	if (y < 0) return m - 1;
+	if (y >= m) return 0;
+	return y;
+}
+
+int main()
+{
+	long long n, p;
+	cin >> n >> p;
+	long long  s = 0, e = 1000000000, k=0, t = 0;
+	while (s < e)
+	{
+		k = p;
+		t = (s + e) / 2;
+		long long pr = 1,sum=0;
+		while (t / pr)
+		{
+			sum += t / pr;
+			pr*=k;
+		}
+		if (sum >= n)
+			e = t;
+		else
+			s = t + 1;
+	}
+	cout << e;
+}
