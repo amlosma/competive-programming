@@ -1,0 +1,82 @@
+/*
+لا تقهر عبدا حتى لا يؤذيك دعاءه 
+*/
+#include<bits/stdc++.h>
+#include <stdlib.h>
+#include<assert.h>
+using namespace std;
+#define PI 3.14159265359
+#define OO 1e9
+#define S second
+#define F first
+#define MP                  make_pair
+int dx[] = { 0, 0, -1, 1, 1, 1, -1, -1 };
+int dy[] = { -1, 1, 0, 0, 1, -1, 1, -1 };
+#define sz(v) ( (int) (v.size()) )
+#define all(v) v.begin(),v.end()
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
+int gcd(int a, int b) { return !b ? a : gcd(b, a % b); }
+ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
+int n, m, c = 0;
+int cnt;
+bool valid(int i, int j)
+{
+	return i >= 0 && i < n&&j >= 0 && j<m;
+}
+/*void itfunction_to_Calc_diver_from_1to_1000000()
+{
+long long div[1000001];
+for (long long i = 1; i <= 1000000; i++)
+{
+for (int j = i; j <= 1000000; j += i)
+div[j]++;
+}
+}*/
+long long  mod(long long  a, long long b, long long c)
+{
+	if (b == 0) return 1;
+
+	if (b % 2 == 0)
+	{
+		int x = mod(a, b / 2, c);
+		return (x*x) % c;
+	}
+	else return (a%c * mod(a, b - 1, c)) % c;
+}
+int sum(long long x)
+{
+	int c = 0;
+	while (x)
+	{
+		c += x % 10;
+		x /= 10;
+	}
+	return c;
+}
+int main(){
+	fast();
+	long long x, y;
+	cin >> x;
+	y = sqrt(x);
+       long long  id = y - 40;
+	while (y>=id)
+	{
+		if (y*y + sum(y)*y == x)
+			break;
+		y--;
+	}
+	if ((y*y + sum(y)*y == x))
+		cout << y;
+	else
+		cout << -1;
+	
+}
