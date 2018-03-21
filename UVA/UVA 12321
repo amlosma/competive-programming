@@ -1,0 +1,136 @@
+/*لا تقهر عبدا حتى لا يؤذيك عاءه*/
+#include<bits/stdc++.h>
+#include <stdlib.h>
+#include<assert.h>
+using namespace std;
+#define PI 3.14159265359
+#define OO 1e9
+#define S second
+#define F first
+#define MP                  make_pair
+int dx[] = { 0, 0, -1, 1, 1, 1, -1, -1 };
+int dy[] = { -1, 1, 0, 0, 1, -1, 1, -1 };
+#define sz(v) ( (int) (v.size()) )
+#define all(v) v.begin(),v.end()
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
+ll gcd(ll a, ll b) { return !b ? a : gcd(b, a % b); }
+ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
+int n, m, c = 0;
+int cnt;
+bool valid(int i, int j)
+{
+	return i >= 0 && i < n&&j >= 0 && j<m;
+}
+int fix(int y) {
+	if (y < 0) return m - 1;
+	if (y >= m) return 0;
+	return y;
+}
+int sumDigit(long long  x)
+{
+	int c = 0;
+	while (x)
+	{
+		c += x % 10;
+		x /= 10;
+	}
+	return c;
+}
+long long prod(long long  n)
+{
+	while (n >= 10)
+	{
+		long long  tp = 1;
+		while (n)
+		{
+			int y = n % 10;
+			if (y)
+				tp *= y;
+			n /= 10;
+		}
+		n = tp;
+	}
+	return n;
+}
+/*int divv[1000001];
+void itfunction_to_Calc_diver_from_1to_1000()
+{
+for (int i = 1; i <= 1000000; i++)
+{
+for (int j = i; j <= 1000000; j += i)
+{
+divv[j] += 1;
+}
+}
+}*/
+
+map<string, string>mp1, mp2;
+vector<string>miss, inc, mult;
+set<string>tp;
+void st(string s)
+{
+
+	string qq = s.substr(0, s.find(':'));
+	string rr = s.substr(s.find(':') + 1, sz(s) - (s.find(':') + 1));
+	mp1.insert({ qq, rr });
+	tp.insert(qq);
+
+}
+void st2(string s)
+{
+	string qq = s.substr(0, s.find(':'));
+	string rr = s.substr(s.find(':') + 1, sz(s) - (s.find(':') + 1));
+	mp2.insert({ qq, rr });
+	tp.insert(qq);
+}
+pair<int, int>gas[100000];
+bool compare(const pair<int, int> &a, const pair<int, int> &b) {
+	if (a.first != b.first) return a.first < b.first;
+	return a.second > b.second;
+}
+int main()
+{
+	fast();
+	int n, m,x,y;
+	while (cin >> n >> m&&n&&m)
+	{
+		for (int i = 0; i < m; i++)
+		{
+			cin >> x >> y;
+			gas[i].first = max(0, x - y); gas[i].second=min(n,x+y);
+		}
+		sort(gas, gas + m, compare);
+		if (gas[0].first>0 )
+			cout << -1 << '\n';
+		else
+		{
+			int tp = 0,c=0,w=0;
+			for (int i = c; i < m; i = c)
+			{
+				tp++;
+				int t = i;
+				for (int j = i; j < m&&gas[j].first <= gas[i].second; j++)
+				{
+					if (gas[j].second>gas[t].second)
+						t = j;
+				}
+				w = gas[t].second;
+				if (t == i)break;
+				c = t;
+			}
+			if (w<n)
+				cout << -1 << '\n';else
+			cout << m-tp << '\n';
+		}
+	}
+
+}
