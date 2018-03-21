@@ -1,0 +1,176 @@
+/*لا تقهر عبدا حتى لا يؤذيك عاءه*/
+#include<bits/stdc++.h>
+#include <stdlib.h>
+#include<assert.h>
+using namespace std;
+#define PI 3.14159265359
+#define OO 1e9
+#define S second
+#define F first
+#define MP                  make_pair
+int dx[] = { 0, 0, -1, 1, 1, 1, -1, -1 };
+int dy[] = { -1, 1, 0, 0, 1, -1, 1, -1 };
+#define sz(v) ( (int) (v.size()) )
+#define all(v) v.begin(),v.end()
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
+ll gcd(ll a, ll b) { return !b ? a : gcd(b, a % b); }
+ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
+int n, m, c = 0;
+int cnt;
+bool valid(int i, int j)
+{
+	return i >= 0 && i < n&&j >= 0 && j<m;
+}
+int fix(int y) {
+	if (y < 0) return m - 1;
+	if (y >= m) return 0;
+	return y;
+}
+int sumDigit(long long  x)
+{
+	int c = 0;
+	while (x)
+	{
+		c += x % 10;
+		x /= 10;
+	}
+	return c;
+}
+long long prod(long long  n)
+{
+	while (n >= 10)
+	{
+		long long  tp = 1;
+		while (n)
+		{
+			int y = n % 10;
+			if (y)
+				tp *= y;
+			n /= 10;
+		}
+		n = tp;
+	}
+	return n;
+}
+/*int divv[1000001];
+void itfunction_to_Calc_diver_from_1to_1000()
+{
+for (int i = 1; i <= 1000000; i++)
+{
+for (int j = i; j <= 1000000; j += i)
+{
+divv[j] += 1;
+}
+}
+}*/
+
+map<string, string>mp1, mp2;
+vector<string>miss, inc, mult;
+set<string>tp;
+void st(string s)
+{
+	
+	string qq = s.substr(0, s.find(':'));
+	string rr = s.substr(s.find(':') + 1, sz(s) - (s.find(':') + 1));
+	mp1.insert({ qq, rr });
+	tp.insert(qq);
+
+}
+void st2(string s)
+{
+	string qq = s.substr(0, s.find(':'));
+	string rr = s.substr(s.find(':') + 1, sz(s) - (s.find(':') + 1));
+	mp2.insert({ qq, rr });
+	tp.insert(qq);
+}
+int main()
+{
+	fast();
+	int t,w=0;
+	string s,ss,ww="";
+	cin >> t;
+	while (t--)
+	{
+		cin >> s >> ss;
+		for (int i = 0; i < sz(s); i++)
+		{
+			if (s[i] == ',')
+			{
+				st(ww);
+				ww.clear();
+			}
+			else if (s[i] != '{' && s[i] != '}')
+			{
+				ww += s[i];
+			}
+		}
+		st(ww);
+		ww.clear();
+		for (int i = 0; i < sz(ss); i++)
+		{
+			if (ss[i] == ',')
+			{
+				st2(ww);
+				ww.clear();
+			}
+			else if (ss[i] != '{'&& ss[i] != '}')
+			{
+				ww += ss[i];
+			}
+		}
+		st2(ww);
+		ww.clear();
+		for (set<string> ::iterator it = tp.begin(); it != tp.end(); it++)
+		{
+			if (mp1[*it] != mp2[*it] && mp1[*it] != "" && mp2[*it] != "")
+
+					mult.push_back(*it);
+	
+			else if (mp1[*it]!="" && mp2[*it] == "")
+			{
+				miss.push_back(*it);
+			}
+			else if (mp1[*it] == "" && mp2[*it] != "")
+			{
+				inc.push_back(*it);
+			}
+		}
+		if (inc.size() > 0)
+		{
+			cout << '+' << inc[0];
+			for (int i = 1; i < sz(inc); i++)
+				cout << ',' << inc[i];
+			cout << '\n';
+
+		}
+		if (miss.size() > 0)
+		{
+			cout << '-' << miss[0];
+			for (int i = 1; i < sz(miss); i++)
+				cout << ',' << miss[i];
+			cout << '\n';
+
+		}
+		if (mult.size() > 0)
+		{
+			cout << '*' << mult[0];
+			for (int i = 1; i < sz(mult); i++)
+				cout << ',' << mult[i];
+			cout << '\n';
+
+		}
+		if (miss.size() == 0 && inc.size() == 0 && mult.size() == 0)
+			cout << "No changes" << endl;
+		cout << endl;
+		mp1.clear(); mp2.clear(); mult.clear(); inc.clear(); miss.clear(); tp.clear();
+	}
+}
