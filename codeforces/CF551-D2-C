@@ -1,0 +1,74 @@
+/*لا تقهر عبدا حتى لا يؤذيك عاءه*/
+/*((وَمَنْ أَعْرَضَ عَنْ ذِكْرِي فَإِنَّ لَهُ مَعِيشَةً ضَنكًا وَنَحْشُرُهُ يَوْمَ الْقِيَامَةِ أَعْمَى */
+#include<bits/stdc++.h>
+#include <stdlib.h>
+#include<assert.h>
+using namespace std;
+#define PI 3.14159265359
+#define OO 1e9
+#define S second
+#define F first
+#define MP                  make_pair
+int dy[] = { -1, 1, 0, 0, 1, -1, 1, -1 };
+#define sz(v) ( (int) (v.size()) )
+#define all(v) v.begin(),v.end()
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+}
+vector<long long >v;
+void dfs(long long  m){
+	if (m > 1e9)return;
+	v.push_back(m);
+	dfs(m * 10 + 4);
+	dfs(m * 10 + 7);
+}
+int arr[1000000], ar[100000];
+int main()
+{
+	fast();
+int n, m, tp;
+cin >> n >> m;
+for (int i = 0; i < n; i++) {
+	cin >> arr[i];
+	ar[i] = arr[i];
+	if (arr[i] > 0)
+		tp = i;
+}
+long long s = 0, e = (long long)1e16, sec = -1;
+while (s <= e) {
+	long long mid = (e + s) / 2LL;
+	long long cur;
+	int start = tp;
+	for (int i = 0; i < m && start >= 0; i++) {
+		cur = mid - (start + 1);
+
+ 		for (; start >= 0 && cur > 0; start--) {
+			long long mn = min(1LL * arr[start], cur);
+			arr[start] -= mn;
+			cur -= mn;
+
+			if (cur==0)
+				break;
+		}
+		while (start >= 0 && arr[start] == 0)
+			--start;
+	}
+	if (start == -1) {
+		sec = mid;
+		e = mid - 1;
+	}
+	else {
+		s = mid + 1;
+	}
+	for (int i = 0; i < n; i++)
+		arr[i] = ar[i];
+}
+cout << sec << endl;
+}
