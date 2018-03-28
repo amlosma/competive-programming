@@ -54,3 +54,56 @@ int main()
 	}
 	cout << mx;
 }
+///////////////////////////////
+or
+/*لا تقهر عبدا حتى لا يؤذيك عاءه*/
+/*((وَمَنْ أَعْرَضَ عَنْ ذِكْرِي فَإِنَّ لَهُ مَعِيشَةً ضَنكًا وَنَحْشُرُهُ يَوْمَ الْقِيَامَةِ أَعْمَى */
+/**/
+#include<bits/stdc++.h>
+#include <stdlib.h>
+#include<assert.h>
+using namespace std;
+#define PI 3.14159265359
+#define OO 1e9
+#define S second
+#define F first
+#define MP                  make_pair
+int dy[] = { -1, 1, 0, 0, 1, -1, 1, -1 };
+#define sz(v) ( (int) (v.size()) )
+#define all(v) v.begin(),v.end()
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+}
+vector<long long >v;
+
+int arr[1000],n;
+int LIS(int i, int prev)
+{
+	if (i == n)
+		return 0;
+
+	int choice1 = LIS(i + 1, prev);
+	int choice2 = 0;
+
+	if (prev == n || arr[prev] < arr[i])
+		choice2 = LIS(i + 1, i) + 1;
+
+	return max(choice1, choice2);
+}
+int main()
+{
+	int  mx = -1;
+	cin >> n;
+	arr[0] = -1;
+	for (int i = 0; i < n; i++)
+		cin >> arr[i];
+	cout << LIS(0, n);
+}
+	
