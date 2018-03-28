@@ -24,28 +24,33 @@ void fast()
 
 }
 vector<long long >v;
-
-int arr[1000],n;
-int longest(int i, int next)
-{
-	if (i == n)
-		return 0;
-
-	int choice1 = longest(i + 1, next);
-	int choice2 = 0;
-
-	if (next == n || arr[next] < arr[i])
-		choice2 = longest(i + 1, i) + 1;
-
-	return max(choice1, choice2);
-}
+vector<int>st;
+int arr[1000];
 int main()
 {
-	int  mx = -1;
+	int n, mx = -1;
 	cin >> n;
-	
+	arr[0] = -1;
 	for (int i = 0; i < n; i++)
 		cin >> arr[i];
-	cout << longest(0, n);
+	for (int i = 1; i <(1<< n); i++)
+	{
+		for (int j = 0; j < n;j++)
+		{
+			if (i &(1 << j))
+				st.push_back(j);
+		}
+		int m = 1,x=st[0];
+		for (int j = 1; j < sz(st); j++)
+		{
+			if (arr[st[j]]>arr[x])
+			{
+				m++;
+				x = st[j];
+			}
+		}
+		mx = max(mx, m);
+		st.clear();
+	}
+	cout << mx;
 }
-	
