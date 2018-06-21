@@ -1,3 +1,4 @@
+
 #define _CRT_SECURE_NO_WARNINGS
 #include<bits/stdc++.h>
 #include <stdlib.h>
@@ -24,7 +25,6 @@ void fast()
 }
 ll gcd(ll a, ll b) { return !b ? a : gcd(b, a % b); }
 ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
-
 int n, m;
 bool valid(int i, int j)
 {
@@ -33,44 +33,41 @@ bool valid(int i, int j)
 /*
 كُن مُشعًّا ، كُن شخصًا يُستضاءُ بهِ أملًا ، و اصنع مِن نفسك روحًا يُحبّها الله 💜
 */
-
 vector<int> edj[1005];
-int dfn[1005], low[1005],instack[1005];
-
+int dfn[1005], low[1005], instack[1005];
 int ndfs;
 vector<int> Stack;
 int scc_cnt;
-
-void Tarjan(int cur)
+void Tarjan(int node)
 {
-	dfn[cur] = low[cur] = ++ndfs;
-	Stack.push_back(cur);
-	for (int nxt : edj[cur]) {
+	dfn[node] = low[node] = ++ndfs;
+	Stack.push_back(node);
+	for (int nxt : edj[node]) {
 		if (!dfn[nxt]) {
 			Tarjan(nxt);
-			low[cur] = min(low[cur], low[nxt]);
+			low[node] = min(low[node], low[nxt]);
 		}
-		else if (find(Stack.begin(), Stack.end(), nxt) != Stack.end())  // if in Stack
-			low[cur] = min(low[cur], dfn[nxt]);
+		else if (find(Stack.begin(), Stack.end(), nxt) != Stack.end()) 
+			low[node] = min(low[node], dfn[nxt]);
 	}
-	if (dfn[cur] == low[cur]) {
+	if (dfn[node] == low[node]) {
 		++scc_cnt;
 		int nxt;
 		do {
 			nxt = Stack.back();
 			Stack.pop_back();
-		} while (cur != nxt);
+		} while (node != nxt);
 	}
 }
-
 int main()
 {
 	fast();
-	while (cin>>n>>m && (n || m)) {
-		
+	while (cin >> n >> m && (n || m)) {
+
 		for (int i = 0; i <= n; i++)edj[i].clear();
 		fill(dfn, dfn + n + 1, 0);
-		fill(low, low + n+ 1, 0);
+		fill(low, low + n + 1, 0);
+		
 		ndfs = 0;
 		Stack.clear();
 		int u, v, p;
@@ -85,8 +82,7 @@ int main()
 		scc_cnt = 0;
 		for (int i = 1; i <= n; ++i)
 		if (!dfn[i] && scc_cnt <= 1) Tarjan(i);
-
 		if (scc_cnt == 1) cout << 1 << endl;
-		else cout<<"0"<<endl;
+		else cout << "0" << endl;
 	}
 }
