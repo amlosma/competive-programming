@@ -1,0 +1,63 @@
+//https://codeforces.com/contest/276/problem/D
+#define _CRT_SECURE_NO_WARNINGS
+#include<bits/stdc++.h>
+#include <stdlib.h>
+#include<assert.h>
+using namespace std;
+#define PI 3.14159265359
+#define OO 1e9
+#define S second
+#define F first
+#define MP                  make_pair
+#define sz(v) ( (int) (v.size()) )
+#define all(v) v.begin(),v.end()
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+#define endl "\n"
+int dx[] = { -1, 0, 1, 0 };
+int dy[] = { 0, -1, 0, 1 };
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
+ll gcd(ll a, ll b) { return !b ? a : gcd(b, a % b); }
+ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
+int n, m;
+bool valid(int i, int j)
+{
+	return i >= 0 && i < n&&j >= 0 && j < n;
+}
+/*
+كُن مُشعًّا ، كُن شخصًا يُستضاءُ بهِ أملًا ، و اصنع مِن نفسك روحًا يُحبّها الله ??
+*/
+vector<bool >pr(5000, true);
+void prime(){
+	for (int i = 2; i < 5000; i++)
+	{
+		if (pr[i])
+		for (int j = i * 2; j < 5000; j += i)
+		{
+			pr[j] = 0;
+		}
+	}
+}
+
+int main()
+{
+	fast();
+	ll  x, k,mx=0 ;
+	cin >> x>>k;
+	ll tp = 1;
+
+	for (int i = 0; i <= 64; i++)
+	{
+		ll a = x&(1LL << i);
+		ll b = k&(1LL << i);
+		if (a != b)
+			mx = max(mx, (1LL << i)^(1LL<<i)-1);
+	}
+	cout << mx;
+}
