@@ -1,0 +1,96 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<bits/stdc++.h>
+#include <stdlib.h>
+#include<assert.h>
+using namespace std;
+#define PI 3.14159265359
+#define OO 1e9
+#define S second
+#define F first
+#define fr(a,b)    for (int i = a; i < b;i++)
+#define rfr(a,b)    for (int i = b;i >= a;i--)
+#define MP                  make_pair
+#define sz(v) ( (int) (v.size()) )
+#define all(v) v.begin(),v.end()
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+#define endl "\n"
+int dx[] = { -1, 0, 1, 0 };
+int dy[] = { 0, -1, 0, 1 };
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
+ll gcd(ll a, ll b) { return !b ? a : gcd(b, a % b); }
+ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
+int n, m,cnt;
+bool valid(int i, int j)
+{
+	return i >= 0 && i < n&&j >= 0 && j < m;
+}
+vector<ll>adj[100001];
+int vis[100000];
+vector<int>top;
+void tosort(int n){
+	vis[n] = 1;
+	fr(0, sz(adj[n]))
+	{
+		if (vis[adj[n][i]] == 0)
+			tosort(adj[n][i]);
+	}
+	top.push_back(n);
+}
+void dfs(int n)
+{
+	
+	vis[n] = 0;
+	fr(0, sz(adj[n]))
+	{
+		if (vis[adj[n][i]] == 1)
+			dfs(adj[n][i]);
+	}
+}
+void scc(int n)
+{
+	fill(vis, vis + n + 2, 0);
+	fr(0, n+2)adj[i].clear();
+	cnt = 0;
+}
+double x[100001], y[100001], d[100001];
+int main() {
+	fast();
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		cin >> n;
+		scc(n);
+		for (int i = 1; i <= n; i++)
+		{
+			cin >> x[i] >> y[i] >> d[i];
+		}
+		fr(1, n + 1)
+		{
+			for (int j = 1; j < n + 1; j++)
+			{
+				if (i == j)continue;
+				if (x[i] + (d[i] / 2.0) >= x[j] && x[i] - (d[i] / 2.0) <= x[j] && y[i] + (d[i] / 2.0) >= y[j] && y[i] - (d[i] / 2.0) <= y[j] )
+					adj[i].push_back(j);
+			}
+		}
+		fr(1, n + 1){
+			if (vis[i] == 0)
+				tosort(i);
+		}
+		reverse(all(top));
+		fr(0, sz(top)){
+			if (vis[top[i]] == 1)
+				dfs(top[i]),cnt++;
+		}
+		cout << cnt << endl;
+		top.clear();
+	}
+}
