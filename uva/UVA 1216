@@ -1,0 +1,98 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<bits/stdc++.h>
+#include <stdlib.h>
+#include<assert.h>
+using namespace std;
+#define PI 3.14159265359
+#define OO 1e9
+#define S second
+#define F first
+#define fr(a,b)    for (int i = a; i < b;i++)
+#define rfr(a,b)    for (int i = b;i >= a;i--)
+#define MP                  make_pair
+#define sz(v) ( (int) (v.size()) )
+#define all(v) v.begin(),v.end()
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+#define endl "\n"
+int dx[] = { -1, 0, 1, 0 };
+int dy[] = { 0, -1, 0, 1 };
+void fast()
+{
+	std::ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
+ll gcd(ll a, ll b) { return !b ? a : gcd(b, a % b); }
+ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
+int n, m,cnt;
+bool valid(int i, int j)
+{
+	return i >= 0 && i < n&&j >= 0 && j < m;
+}
+#include <math.h>
+using namespace std;
+int x[1000], y[1000];
+struct Edge {
+	int x, y;
+	long long w;
+	
+	bool operator<(const Edge &a) const {
+		return  w < a.w;
+	}
+};
+Edge dis[1000000];
+int per[1000], r[1000];
+int findp(int x) {
+	return per[x] == x ? x : (per[x] = findp(per[x]));
+}
+int check(int x, int y) {
+	x = findp(x), y = findp(y);
+	if (x == y)
+		return 0;
+	if (r[x] > r[y])
+		r[x] += r[y], per[y] = x;
+	else
+		r[y] += r[x], per[x] = y;
+	return 1;
+}
+int main() {
+	int t;
+	
+	cin >> t;
+	while (t--) {
+		int n, m, e;
+		cin >> n;
+		m = 0, e = 0;
+		while (cin>>x[m] && x[m] != -1)
+			cin>>y[m], m++;
+		for (int i = 0; i < m; i++)
+		for (int j = i + 1; j < m; j++)
+		{
+
+			dis[e].x = i;
+			dis[e].y = j;
+			dis[e].w =( (long long)x[i] - x[j])*(x[i] - x[j]) + ((long long)y[i] - y[j])*(y[i] - y[j]);
+
+			e++;
+		}
+		sort(dis, dis + e);
+		for (int i = 0; i < m; i++)
+			per[i] = i, r[i] = 1;
+		int ct = m;
+		for (int i = 0; i < e; i++) {
+			if (check(dis[i].x, dis[i].y))
+				ct--;
+			if (ct <= n) {
+
+				cout << ceil(sqrt(dis[i].w)) << endl;
+				break;
+			}
+		}
+	}
+	return 0;
+}
+
+
+	
